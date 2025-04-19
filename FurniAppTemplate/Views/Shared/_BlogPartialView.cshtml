@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Blog>
+@foreach (var item in Model)
+{
+	<div class="col-12 col-sm-6 col-md-4 mb-5">
+		<div class="post-entry">
+			<a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id" class="post-thumbnail"><img src="images/@item.ImageUrl" alt="Image" class="img-fluid"></a>
+			<div class="post-content-entry">
+				<h3><a href="#">@item.Title</a></h3>
+				<div class="meta">
+					<span>
+						@Html.Raw(item.Description)
+					</span>
+					<span>
+						@Html.Raw(item.Date)
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+}
