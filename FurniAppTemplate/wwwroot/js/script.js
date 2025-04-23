@@ -10,6 +10,7 @@
                 skip += 3;
                 if (skip >= $("#blogCount").val()) {
                     $("#loadMore").remove();
+                    $("#load")
                 }
             },
             error: function (error) {
@@ -22,7 +23,7 @@
 
 $(document).ready(function () {
     $("#input-search").on("keyup", function () {
-        $("searchList li").slice(1).remove();
+        $("#searchList li").slice(1).remove();
         let value = $(this).val().trim();
         if (value) {
             $.ajax({

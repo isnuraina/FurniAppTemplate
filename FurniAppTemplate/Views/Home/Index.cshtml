@@ -38,13 +38,16 @@
 			@foreach(var item in Model.Furnitures)
 			{
 				<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-					<a class="product-item" href="cart.html">
+					<a class="product-item" asp-controller="basket" asp-action="addbasket" asp-route-id="@item.Id">
 						<img src="~/images/@item.ImageURL" class="img-fluid product-thumbnail">
 						<h3 class="product-title">@item.Title</h3>
 						<strong class="product-price">$@item.Price.00</strong>
 
 						<span class="icon-cross">
-							<img src="~/images/cross.svg" class="img-fluid">
+							
+							
+								<img src="~/images/cross.svg" class="img-fluid" >
+							
 						</span>
 					</a>
 				</div>
