@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Furniture>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Category Table</h4>
+                    <a class="btn btn-outline-success" asp-area="admin" asp-controller="furniture" asp-action="create">Create</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Image</th>
+                                    <th>Settings</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var furniture in Model)
+                                {
+                                    <tr>
+                                        <td>@furniture.Title</td>
+                                        <td>@furniture.Description</td>
+                                        <td>@furniture.Price</td>
+                                        <td>
+                                            <img src="~/images/@furniture.ImageURL" />
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-primary" asp-action="detail" asp-route-id="@furniture.Id">Detail</a>
+                                            <a class="btn btn-outline-success" asp-action="update" asp-route-id="@furniture.Id">Update</a>
+                                            <a class="btn btn-outline-danger" asp-action="delete" asp-route-id="@furniture.Id">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

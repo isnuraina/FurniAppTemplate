@@ -1,10 +1,11 @@
 ﻿using FurniAppTemplate.Migrations;
 using FurniAppTemplate.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FurniAppTemplate.Data
 {
-    public class FurnitureDbContext:DbContext
+    public class FurnitureDbContext:IdentityDbContext<AppUser>
     {
         public FurnitureDbContext(DbContextOptions options):base(options)
         {
