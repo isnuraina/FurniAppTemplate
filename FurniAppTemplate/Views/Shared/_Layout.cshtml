@@ -1,10 +1,19 @@
-﻿<!-- /*
+﻿@using Microsoft.AspNetCore.Identity
+<!-- /*
 * Bootstrap 5
 * Template Name: Furni
 * Template Author: Untree.co
 * Template URI: https://untree.co/
 * License: https://creativecommons.org/licenses/by/3.0/
 */ -->
+@inject UserManager<AppUser> UserManager
+@{
+	var user = await UserManager.GetUserAsync(User);
+}
+@{
+	var currentUser = await UserManager.GetUserAsync(User);
+}
+
 
 <!doctype html>
 <html lang="en">
@@ -63,7 +72,40 @@
 
 
 				<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-					<li><a class="nav-link" href="#"><img src="~/images/user.svg"></a></li>
+					<li class="nav-item">
+						@if (!User.Identity.IsAuthenticated)
+						{
+							if (Context.Request.Path == "/") // yalnız home səhifədə görünsün
+							{
+								<!-- SVG icon göstər, Register səhifəsinə keç -->
+								<a class="nav-link" asp-controller="account" asp-action="register">
+									<img src="~/images/user.svg" alt="Register">
+								</a>
+							}
+							else
+							{
+								<!-- Register olduqdan sonra Login göstər -->
+								<a class="nav-link" asp-controller="account" asp-action="login">Login</a>
+							}
+						}
+						else
+						{
+							<!-- İstifadəçi login olubsa, UserName və Logout -->
+							<div class="dropdown">
+								<button class="btn btn-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+									@currentUser.UserName
+								</button>
+								<ul class="dropdown-menu">
+									<li>
+										<form asp-controller="account" asp-action="logout" method="post">
+											<button class="dropdown-item" type="submit">Logout</button>
+										</form>
+									</li>
+								</ul>
+							</div>
+						}
+					</li>
+					
 					<li><a class="nav-link" asp-controller="basket" asp-action="showbasket"><img src="~/images/cart.svg">
 							<sup style="font-size: 30px; color: red;">
 								<span class="basket-count">
